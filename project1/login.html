@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ScheduleYou :: Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="schedule.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function LogOn(userId, pass) {
+            var webMethod = "ProjectServices.asmx/LogOn";
+            var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d) {
+                        alert("Logon Sucessful");
+                        window.location.href = "home.html";
+                    }
+                    else {
+                        alert("Logon Failed");
+                    }
+                },
+                error: function (e) {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+
+</head>
+
+  <body>
+    <div id="wrapper">
+      <div id="loginPage">
+        <header>
+          <img src="logo.png" alt="ScheduleYou Logo">
+          <h1>ScheduleYou</h1>
+        </header>
+
+        <main>
+          <div id="login">
+              <form onsubmit="LogOn($('#myUsername').val(), $('#myPassword').val()); return false;">
+                  <label for="myUsername">Username:</label>
+                  <input type="text" name="myUsername" id="myUsername" required="required">
+
+                  <label for="myPassword">Password:</label>
+                  <input type="password" name="myPassword" id="myPassword" maxlength="12" required="required">
+
+                  <button type="submit">Login</button>
+              </form>
+            <a href="createaccount.html">Create An Account</a>
+          </div>
+        </main>
+
+        <footer>
+          Copyright &copy; 2019 ScheduleYou<br>
+          <a href="mailto:HackStreetBoys@cis440.com">HackStreetBoys@cis440.com</a>
+        </footer>
+      </div>
+    </div>
+  </body>
+
+</html>
